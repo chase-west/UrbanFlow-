@@ -10,23 +10,23 @@ class Cell
 	string cellType; 
 
 	public:
+	Cell() = default;
+
+	public:
 		Cell(int x, int y, string cellType) {
 			this->x = x;
-			this->y = y;
+			this->y = y; 
 			this->cellType = cellType;
 		}
-
-
 };
 
 class Grid
 {
+	vector<vector<Cell>> grid; //define the 2d vector here so other methods can access 
+
 	public : 
 		void generateGrid(int rows, int columns) // get rows and columns in order to create max grid size
 		{
-
-			vector<vector<Cell>> grid;
-
 			grid.resize(rows);
 
 			for (int i = 0; i < rows; i++)
@@ -37,6 +37,22 @@ class Grid
 				{
 					grid[i][j] = Cell(i, j, "test");
 				}
+			}
+		}
+
+
+		void showGrid()
+		{
+			int rows = grid.size();
+			int columns = grid[0].size();
+
+			for (int i = 0; i < rows; i++)
+			{
+				for (int j = 0; j < columns; j++)
+				{
+					cout << "[-]";
+				}
+				cout << endl;
 			}
 		}
 };
