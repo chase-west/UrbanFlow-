@@ -25,6 +25,7 @@ class Grid
 	vector<vector<Cell>> grid; //define the 2d vector here so other methods can access 
 
 	public : 
+		int NumOfCells = 0;
 		void generateGrid(int rows, int columns) // get rows and columns in order to create max grid size
 		{
 			grid.resize(rows);
@@ -36,6 +37,7 @@ class Grid
 				for (int j = 0; j < columns; j++)
 				{
 					grid[i][j] = Cell(i, j, "test");
+					NumOfCells++;
 				}
 			}
 		}
