@@ -1,22 +1,36 @@
 #include <string>
 #include <iostream>
 #include <vector>
-
+#include "Vehicle.h"
 
 using namespace std; 
 class Cell
 {
 	int x, y; // x,y location for cell
-	string cellType; 
+	unique_ptr<Vehicle> vehiclePtr;
 
 	public:
 	Cell() = default;
 
 	public:
-		Cell(int x, int y, string cellType) {
+		Cell(int x, int y) {
 			this->x = x;
 			this->y = y; 
-			this->cellType = cellType;
+		}
+
+		void setVehicle(Vehicle* v) { vehiclePtr = unique_ptr<Vehicle>(v); }
+		Vehicle* getVehicle() const {return vehiclePtr.get(); }
+
+		bool isOccupied()
+		{
+			if (vehiclePtr != nullptr)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 };
 
@@ -36,10 +50,14 @@ class Grid
 
 				for (int j = 0; j < columns; j++)
 				{
-					grid[i][j] = Cell(i, j, "test");
+					grid[i][j] = Cell(i, j);
 					NumOfCells++;
 				}
 			}
+		}
+		Cell& getCell(int row, int col)
+		{
+			return grid[row][col];
 		}
 
 
@@ -52,9 +70,23 @@ class Grid
 			{
 				for (int j = 0; j < columns; j++)
 				{
-					cout << "[-]";
+					if (grid[i][j].isOccupied() == true)
+					{
+						cout << "[c]";
+					}
+					else 
+					{
+						cout << "[-]";
+					}
 				}
 				cout << endl;
 			}
+		}
+
+
+		void placeVehicle(Vehicle* vehicle, int row, int column)
+		{
+			vehicle->setLocation(row, column);
+			grid[row][column].setVehicle(vehicle);
 		}
 };

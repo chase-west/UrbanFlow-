@@ -1,14 +1,32 @@
-#include "Vehicle.cpp"
+#include "Vehicle.h"
 #include <iostream>
 #include "grid.cpp"
 #include <random>
 
-
+using namespace std; 
 // generate Vehicles to put on the grid
-void createVehicles(int amount)
+void createVehicles(int amount, Grid& grid, int rows, int columns)
 {
-    // place the vehicles on the grid
+    // generate random amount of vehicles bounded by the rows and columns 
+    random_device rd; 
+    mt19937 gen(rd());
+    uniform_int_distribution<> rowDistrib(0, rows - 1);
+    uniform_int_distribution<> colDistrib(0, columns - 1);
 
+    // place the vehicles on the grid
+    for (int i = 0; i < amount; i++)
+    {
+        int row = 0;
+        int column = 0;
+        do {
+            row = rowDistrib(gen);
+            column = rowDistrib(gen);
+        } while (grid.getCell(row, column).isOccupied());
+
+        Vehicle* v = new Vehicle();
+
+        grid.placeVehicle(v, row, column);
+    }
 }
 
 int main()
@@ -20,7 +38,6 @@ int main()
     int availableSpots = 4; // how many empty spots should there be for movement
     int maxCars = 20; 
 
-
     grid.generateGrid(rows, columns);
 
     // create random amount robot cars to drive around
@@ -31,7 +48,7 @@ int main()
         int carAmount = distrib(gen);
         if (grid.NumOfCells >= carAmount - availableSpots)
         {
-            createVehicles(distrib(gen));
+            createVehicles(carAmount, grid, rows, columns);
         }
         else 
         {

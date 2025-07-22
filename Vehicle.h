@@ -1,4 +1,5 @@
 #include <utility>
+#pragma once
 using namespace std; 
 class Vehicle 
 {
