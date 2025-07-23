@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include "Vehicle.h"
-
 using namespace std; 
 class Cell
 {

@@ -5,6 +5,11 @@
 #include <queue>
 
 using namespace std;
+
+
+// store vehicles when making them 
+vector<Vehicle*> vehicles;
+
 // generate Vehicles to put on the grid
 void createVehicles(int amount, Grid &grid, int rows, int columns)
 {
@@ -23,9 +28,12 @@ void createVehicles(int amount, Grid &grid, int rows, int columns)
         {
             row = rowDistrib(gen);
             column = rowDistrib(gen);
-        } while (grid.getCell(row, column).isOccupied());
+        } 
+        while (grid.getCell(row, column).isOccupied());
 
         Vehicle *v = new Vehicle();
+
+        vehicles.emplace_back(v);
 
         grid.placeVehicle(v, row, column);
     }
@@ -33,7 +41,22 @@ void createVehicles(int amount, Grid &grid, int rows, int columns)
 
 void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 {
-    // implement dijkstra's
+    bool usingBadAlg = true;
+    // this is gonna be a ima try and figure it out alg
+
+    if (usingBadAlg)
+    {
+        auto loc = vehicle.getLocation();
+        int currentRow = loc.first;
+        int currentColumn = loc.second;
+
+        if (currentRow == targetRow && currentColumn == targetColumn) // base case 
+        {
+            cout << "Already at target area!" << endl;
+            grid.getCell(currentRow, currentColumn).setVehicle(nullptr);
+            grid.showGrid();
+        }
+    }
 }
 
 int main()
@@ -80,4 +103,8 @@ int main()
 
     cout << "Enter the row of where you want the cars to go to." << endl;
     cin >> targetColumn;
+    for (int i = 0; i < vehicles.size(); i++)
+    {
+        pathFind(grid, *vehicles[i], targetRow, targetColumn);
+    }
 }
