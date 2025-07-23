@@ -44,18 +44,20 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
     bool usingBadAlg = true;
     // this is gonna be a ima try and figure it out alg
 
+    auto loc = vehicle.getLocation();
+    int currentRow = loc.first;
+    int currentColumn = loc.second;
+
+    if (currentRow == targetRow && currentColumn == targetColumn) // base case 
+    {
+        cout << "Already at target area!" << endl;
+        grid.getCell(currentRow, currentColumn).setVehicle(nullptr);
+        grid.showGrid();
+    }
+
     if (usingBadAlg)
     {
-        auto loc = vehicle.getLocation();
-        int currentRow = loc.first;
-        int currentColumn = loc.second;
-
-        if (currentRow == targetRow && currentColumn == targetColumn) // base case 
-        {
-            cout << "Already at target area!" << endl;
-            grid.getCell(currentRow, currentColumn).setVehicle(nullptr);
-            grid.showGrid();
-        }
+        
     }
 }
 
