@@ -41,8 +41,7 @@ void createVehicles(int amount, Grid &grid, int rows, int columns)
 
 void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 {
-    bool usingDijkstra = true;
-    // this is gonna be a ima try and figure it out alg
+    bool BFS = true; // future implementation allow for diff algs i guess this is just for rn
 
     auto loc = vehicle.getLocation();
     int currentRow = loc.first;
@@ -55,7 +54,7 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
         grid.showGrid();
     }
 
-    if (usingDijkstra)
+    if (BFS)
     {
         
     }
