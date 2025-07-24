@@ -71,7 +71,7 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 
     if (BFS)
     {
-        bool visited[ROW][COL];
+        bool visited[rowSize][COL];
 
         queue<pair<int, int> > q; 
         q.push({currentRow, currentColumn});
@@ -83,12 +83,12 @@ int main()
 {
     // define all the variables needed for the grid
     Grid grid;
-    int rows = 10;
-    int columns = 10;
+    int rowSize = 10;
+    int columnSize = 10;
     int availableSpots = 4; // how many empty spots should there be for movement
     int maxCars = 20;
 
-    grid.generateGrid(rows, columns);
+    grid.generateGrid(rowSize, columnSize);
 
     // create random amount robot cars to drive around
     try
@@ -99,7 +99,7 @@ int main()
         int carAmount = distrib(gen);
         if (grid.NumOfCells >= carAmount - availableSpots)
         {
-            createVehicles(carAmount, grid, rows, columns);
+            createVehicles(carAmount, grid, rowSize, columnSize);
         }
         else
         {
