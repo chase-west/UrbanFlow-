@@ -39,6 +39,21 @@ void createVehicles(int amount, Grid &grid, int rows, int columns)
     }
 }
 
+bool isValid(int row, int col, Grid &grid)
+{
+    if (row < 0 || col < 0)
+    {
+        return false; 
+    }
+
+    if (grid.getCell(row, col).isOccupied())
+    {
+        return false; 
+    }
+
+    return true; 
+}
+
 void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 {
     bool BFS = true; // future implementation allow for diff algs i guess this is just for rn
@@ -56,7 +71,11 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 
     if (BFS)
     {
-        
+        bool visited[ROW][COL];
+
+        queue<pair<int, int> > q; 
+        q.push({currentRow, currentColumn});
+
     }
 }
 
