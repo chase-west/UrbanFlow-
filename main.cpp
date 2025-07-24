@@ -71,7 +71,9 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 
     if (BFS)
     {
-        bool visited[rowSize][COL];
+        
+        bool visited[grid.getNumOfRows()][grid.getNumOfColumns()];
+        
 
         queue<pair<int, int> > q; 
         q.push({currentRow, currentColumn});

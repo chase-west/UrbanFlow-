@@ -60,6 +60,17 @@ class Grid
 		}
 
 
+		int getNumOfRows()
+		{
+			return grid.size();
+		}
+
+		int getNumOfColumns()
+		{
+			return grid[0].size(); 
+		}
+
+
 		void showGrid()
 		{
 			int rows = grid.size();
