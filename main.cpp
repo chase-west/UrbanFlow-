@@ -39,7 +39,7 @@ void createVehicles(int amount, Grid &grid, int rows, int columns)
     }
 }
 
-bool isValid(int row, int col, Grid &grid)
+bool isValid(visited[][], int row, int col, Grid &grid)
 {
     if (row < 0 || col < 0)
     {
@@ -71,12 +71,36 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
 
     if (BFS)
     {
+        // direction vectors
+        int dRow[] = { -1, 0, 1, 0 };
+        int dCol[] = { 0, 1, 0, -1 };
         
-        bool visited[grid.getNumOfRows()][grid.getNumOfColumns()];
-        
-
+        bool visited[grid.getNumOfRows()][grid.getNumOfColumns()]; // track visited cells
+    
         queue<pair<int, int> > q; 
         q.push({currentRow, currentColumn});
+
+        visited[currentRow][currentColumn] = true;
+
+        while (!q.empty())
+        {
+            pair<int, int> cell = q.front();
+            int x = cell.first;
+            int y = cell.second;
+
+            // update car position and output grid here!! 
+
+            q.pop();
+
+            // go to other cells
+            for (int i = 0; i < 4; i++)
+            {
+                int adjX = x + dRow[i];
+                int adjY = y + dCol[i];
+            }
+
+            if(isValid(visited, ))
+        }
 
     }
 }
