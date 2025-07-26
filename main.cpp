@@ -6,6 +6,10 @@
 
 using namespace std;
 
+// global size of grid 
+const int rowSize = 10;
+const int columnSize = 10;
+
 
 // store vehicles when making them 
 vector<Vehicle*> vehicles;
@@ -39,8 +43,8 @@ void createVehicles(int amount, Grid &grid, int rows, int columns)
     }
 }
 
-bool isValid(visited[][], int row, int col, Grid &grid)
-{
+bool isValid(bool visited[][columnSize], int row, int col, Grid &grid)
+{ 
     if (row < 0 || col < 0)
     {
         return false; 
@@ -75,7 +79,7 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
         int dRow[] = { -1, 0, 1, 0 };
         int dCol[] = { 0, 1, 0, -1 };
         
-        bool visited[grid.getNumOfRows()][grid.getNumOfColumns()]; // track visited cells
+        bool visited[rowSize][columnSize]; // track visited cells
     
         queue<pair<int, int> > q; 
         q.push({currentRow, currentColumn});
@@ -97,9 +101,21 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
             {
                 int adjX = x + dRow[i];
                 int adjY = y + dCol[i];
+
+                if(isValid(visited, adjX, adjY, grid))
+                {
+                    q.push({adjX, adjY});
+                    visited[adjX][adjY] = true;
+
+
+                    // update grid 
+                    grid.getCell(x, y).setOccupied(false);
+                    grid.getCell(adjX, adjY).setOccupied(true); 
+                    grid.showGrid();  
+                }
             }
 
-            if(isValid(visited, ))
+            
         }
 
     }
@@ -109,8 +125,6 @@ int main()
 {
     // define all the variables needed for the grid
     Grid grid;
-    int rowSize = 10;
-    int columnSize = 10;
     int availableSpots = 4; // how many empty spots should there be for movement
     int maxCars = 20;
 
@@ -151,6 +165,6 @@ int main()
     cin >> targetColumn;
     for (int i = 0; i < vehicles.size(); i++)
     {
-        pathFind(grid, *vehicles[i], targetRow, targetColumn);
+       pathFind(grid, *vehicles[i], targetRow, targetColumn);
     }
 }

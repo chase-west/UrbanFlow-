@@ -6,6 +6,7 @@ using namespace std;
 class Cell
 {
 	int x, y; // x,y location for cell
+	bool tOccupied = false; // if current cell is occupied 
 	unique_ptr<Vehicle> vehiclePtr;
 
 	public:
@@ -17,18 +18,36 @@ class Cell
 			this->y = y; 
 		}
 
+		void setOccupied(bool isOccupied)
+		{
+			if(isOccupied == true)
+			{
+				tOccupied = true;
+			}
+			else
+			{
+				tOccupied = false; 
+			}
+		}
+
 		void setVehicle(Vehicle* v) { vehiclePtr = unique_ptr<Vehicle>(v); }
 		Vehicle* getVehicle() const {return vehiclePtr.get(); }
 
 		bool isOccupied()
 		{
-			if (vehiclePtr != nullptr)
-			{
-				return true;
-			}
-			else
+			if (vehiclePtr == nullptr)
 			{
 				return false;
+			}
+
+			if (tOccupied == false)
+			{
+				return false;
+			}
+
+			else 
+			{
+				return true;
 			}
 		}
 };
