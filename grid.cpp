@@ -6,7 +6,7 @@ using namespace std;
 class Cell
 {
 	int x, y; // x,y location for cell
-	bool tOccupied = false; // if current cell is occupied 
+	bool tOccupied = true; // if current cell is occupied 
 	unique_ptr<Vehicle> vehiclePtr;
 
 	public:

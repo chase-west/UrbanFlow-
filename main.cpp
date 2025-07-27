@@ -112,10 +112,9 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
                     grid.getCell(x, y).setOccupied(false);
                     grid.getCell(adjX, adjY).setOccupied(true); 
                     grid.showGrid();  
+                    cout << endl;
                 }
-            }
-
-            
+            } 
         }
 
     }
@@ -163,8 +162,5 @@ int main()
 
     cout << "Enter the row of where you want the cars to go to." << endl;
     cin >> targetColumn;
-    for (int i = 0; i < vehicles.size(); i++)
-    {
-       pathFind(grid, *vehicles[i], targetRow, targetColumn);
-    }
+    pathFind(grid, *vehicles[0], targetRow, targetColumn);
 }
