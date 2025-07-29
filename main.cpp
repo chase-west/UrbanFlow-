@@ -9,6 +9,7 @@ using namespace std;
 // global size of grid 
 const int rowSize = 10;
 const int columnSize = 10;
+bool visited[rowSize][columnSize]; // track visited cells
 
 
 // store vehicles when making them 
@@ -79,8 +80,6 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
         int dRow[] = { -1, 0, 1, 0 };
         int dCol[] = { 0, 1, 0, -1 };
         
-        bool visited[rowSize][columnSize]; // track visited cells
-    
         queue<pair<int, int> > q; 
         q.push({currentRow, currentColumn});
 
@@ -106,8 +105,7 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
                 {
                     q.push({adjX, adjY});
                     visited[adjX][adjY] = true;
-
-
+            
                     // update grid 
                     grid.getCell(x, y).setOccupied(false);
                     grid.getCell(adjX, adjY).setOccupied(true); 
@@ -162,5 +160,13 @@ int main()
 
     cout << "Enter the row of where you want the cars to go to." << endl;
     cin >> targetColumn;
+
+    auto vehicleLocation = vehicles[0]->getLocation();
+    int vehicleRow = vehicleLocation.first;
+    int vehicleColumn = vehicleLocation.second; 
+    
+
+
+    cout << "You're using the vehicle at " << vehicleRow << " row, and " << vehicleColumn << " column";
     pathFind(grid, *vehicles[0], targetRow, targetColumn);
 }
