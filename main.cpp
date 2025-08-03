@@ -50,12 +50,16 @@ bool isValid(bool visited[][columnSize], int row, int col, Grid &grid)
     {
         return false; 
     }
+    
+    if (visited[row][col] == true)
+    {
+        return false; 
+    }
 
     if (grid.getCell(row, col).isOccupied())
     {
         return false; 
     }
-
     return true; 
 }
 
@@ -105,7 +109,7 @@ void pathFind(Grid &grid, Vehicle &vehicle, int targetRow, int targetColumn)
                 {
                     q.push({adjX, adjY});
                     visited[adjX][adjY] = true;
-            
+
                     // update grid 
                     grid.getCell(x, y).setOccupied(false);
                     grid.getCell(adjX, adjY).setOccupied(true); 
@@ -156,7 +160,7 @@ int main()
     int targetColumn = 0;
 
     cout << "Enter the row of where you want the cars to go to." << endl;
-    cin >> targetRow;
+    cin >> targetRow; 
 
     cout << "Enter the row of where you want the cars to go to." << endl;
     cin >> targetColumn;
@@ -164,9 +168,8 @@ int main()
     auto vehicleLocation = vehicles[0]->getLocation();
     int vehicleRow = vehicleLocation.first;
     int vehicleColumn = vehicleLocation.second; 
-    
 
 
-    cout << "You're using the vehicle at " << vehicleRow << " row, and " << vehicleColumn << " column";
+    cout << "You're using the vehicle at " << vehicleRow << " row, and column " << vehicleColumn << endl;
     pathFind(grid, *vehicles[0], targetRow, targetColumn);
 }

@@ -7,7 +7,7 @@ class Cell
 {
 	int x, y; // x,y location for cell
 	bool tOccupied = true; // if current cell is occupied 
-	unique_ptr<Vehicle> vehiclePtr;
+	Vehicle* vehiclePtr;
 
 	public:
 	Cell() = default;
@@ -30,8 +30,8 @@ class Cell
 			}
 		}
 
-		void setVehicle(Vehicle* v) { vehiclePtr = unique_ptr<Vehicle>(v); }
-		Vehicle* getVehicle() const {return vehiclePtr.get(); }
+		void setVehicle(Vehicle* v) { vehiclePtr = v; }
+		Vehicle* getVehicle() {return vehiclePtr; }
 
 		bool isOccupied()
 		{
