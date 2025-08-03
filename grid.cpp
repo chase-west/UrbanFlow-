@@ -6,7 +6,7 @@ using namespace std;
 class Cell
 {
 	int x, y; // x,y location for cell
-	bool tOccupied = true; // if current cell is occupied 
+	bool tOccupied = false; // if current cell is occupied 
 	Vehicle* vehiclePtr;
 
 	public:
@@ -16,17 +16,16 @@ class Cell
 		Cell(int x, int y) {
 			this->x = x;
 			this->y = y; 
+			this->tOccupied = false;
+			this->vehiclePtr = nullptr;
 		}
 
 		void setOccupied(bool isOccupied)
 		{
-			if(isOccupied == true)
+			tOccupied = isOccupied;
+			if (!isOccupied)
 			{
-				tOccupied = true;
-			}
-			else
-			{
-				tOccupied = false; 
+				vehiclePtr = nullptr;
 			}
 		}
 
@@ -35,20 +34,7 @@ class Cell
 
 		bool isOccupied()
 		{
-			if (vehiclePtr == nullptr)
-			{
-				return false;
-			}
-
-			if (tOccupied == false)
-			{
-				return false;
-			}
-
-			else 
-			{
-				return true;
-			}
+			return vehiclePtr != nullptr;
 		}
 };
 
